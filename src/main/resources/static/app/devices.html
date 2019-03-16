@@ -1,0 +1,24 @@
+<nav-hash active="'devices'"/>
+
+<section ng-init="init()" class="container-fluid">
+    <div class="alert alert-info" role="alert" ng-show="!devices.length">
+        Nincs megjeleníthető eszköz.
+    </div>
+    <div class="row" ng-show="devices.length">
+        <div class="col-sm-2 p-2" ng-repeat="device in devices">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        <a class="list-group-item" ng-href="/#/devices/{{device.mac}}">
+                            <i class="fas fa-mobile-alt"></i> <span class="float-right">{{device.name ? device.name : device.mac}}</span>
+                        </a>
+                    </div>
+                </div>
+                <img class="card-img-top"
+                     ng-src="/api/image/{{device.mac}}/last"
+                     alt="{{device.mac}}">
+            </div>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,92 @@
+<nav-hash active="'device'" device="device"/>
+
+<section ng-init="init()" class="container-fluid">
+    <div class="alert alert-info" role="alert" ng-show="!device">
+        Nincs megjeleníthető eszköz.
+    </div>
+
+    <div class="row" ng-show="device">
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-header">
+                    Készülék adatai
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item pb-0">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" disabled ng-model="device.mac">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" style="width: 8em">MAC</span>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" disabled ng-model="device.brand">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" style="width: 8em">Gyártó</span>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" disabled ng-model="device.device">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" style="width: 8em">Eszköz</span>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" disabled ng-model="device.model">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" style="width: 8em">Model</span>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" disabled ng-model="device.sdk">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" style="width: 8em">SDK</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Az eszköz neve"
+                                       ng-model="device.name" ng-change="update()" ng-disabled="loading" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" style="width: 8em">Név</span>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="number" min="1" max="10" class="form-control" placeholder="1-10"
+                                       ng-model="device.frequency" ng-change="update()" ng-disabled="loading" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" style="width: 8em">Frekvencia</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="alert alert-info text-center" role="alert" ng-show="!images.length">
+                Ettől az eszköztől egyetlen képet sem kaptunk még.
+            </div>
+            <div class="row" ng-show="images.length">
+                <div class="col-sm-2 p-2" ng-repeat="image in images">
+                    <div class="card">
+                        <div class="card-body p-0 clickable" ng-click="show(image)">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item" ng-href="/#/devices/{{device.mac}}">
+                                    <i class="far fa-clock"></i> <span class="float-right">{{image.created * 1000 | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <img class="card-img-top clickable"
+                             ng-src="/api/image/{{device.mac}}/id/{{image.id}}"
+                             alt="{{device.mac}}"
+                             ng-click="show(image)"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

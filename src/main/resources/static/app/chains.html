@@ -1,0 +1,110 @@
+<nav-hash active="'chain'"/>
+<section ng-init="init()" class="container-fluid">
+    <h3 class="pt-3">Aktív lánc</h3>
+    <div class="alert alert-info text-center" role="alert" ng-show="!activeChain">
+        Jelenleg nem ismerünk aktív láncot. Válassz ki egyet a mentett láncok közül!
+    </div>
+    <table class="table table-striped" ng-show="activeChain">
+        <thead>
+        <tr class="d-flex">
+            <th class="col-sm-4">Név</th>
+            <th class="col-sm-2">Hossz</th>
+            <th class="col-sm-2">Intervallum</th>
+            <th class="col-sm-2">Késleltetés</th>
+            <th class="col-sm-2 text-center">Eszközök</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="d-flex">
+            <td class="col-sm-4">{{activeChain.name}}</td>
+            <td class="col-sm-2">{{activeChain.length}}</td>
+            <td class="col-sm-2">{{activeChain.intervalDuration}}</td>
+            <td class="col-sm-2">{{activeChain.delay}}</td>
+            <td class="col-sm-2">
+                <button type="button" class="btn btn-sm btn-block btn-primary" ng-click="deselect()"><i
+                        class="fas fa-minus-circle"></i> Leállítás
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3 class="mt-3">Új lánc hozzáadása</h3>
+    <table class="table table-striped">
+        <thead>
+        <tr class="d-flex">
+            <th class="col-sm-4">Név</th>
+            <th class="col-sm-2">Hossz</th>
+            <th class="col-sm-2">Intervallum</th>
+            <th class="col-sm-2">Késleltetés</th>
+            <th class="col-sm-2 text-center">Eszközök</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="d-flex">
+            <td class="col-sm-4">
+                <input type="text" class="form-control form-control-sm" placeholder="A lánc azonosítására szolgáló név"
+                       ng-model="newChain.name"/>
+            </td>
+            <td class="col-sm-2">
+                <input type="number" min="1" max="10" class="form-control form-control-sm" placeholder="A lánc hossza"
+                       ng-model="newChain.length"/>
+            </td>
+            <td class="col-sm-2">
+                <input type="number" min="100" max="10000" class="form-control form-control-sm"
+                       placeholder="Egy intervallum hossza (ms)"
+                       ng-model="newChain.intervalDuration"/>
+            </td>
+            <td class="col-sm-2">
+                <input type="number" min="0" max="20" class="form-control form-control-sm"
+                       placeholder="A késleltetés (intervallum)" ng-model="newChain.delay"/>
+            </td>
+            <td class="col-sm-2">
+                <button type="button" class="btn btn-sm btn-block btn-primary" ng-click="create()"><i
+                        class="fas fa-plus-square"></i> Hozzáadás
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3 class="mt-3">Mentett láncok</h3>
+    <table class="table table-striped" ng-show="chains.length">
+        <thead>
+        <tr class="d-flex">
+            <th class="col-sm-4">Név</th>
+            <th class="col-sm-2">Hossz</th>
+            <th class="col-sm-2">Intervallum</th>
+            <th class="col-sm-2">Késleltetés</th>
+            <th class="col-sm-2 text-center">Eszközök</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="d-flex" ng-repeat="chain in chains">
+            <td class="col-sm-4">{{chain.name}}</td>
+            <td class="col-sm-2">{{chain.length}}</td>
+            <td class="col-sm-2">{{chain.intervalDuration}}</td>
+            <td class="col-sm-2">{{chain.delay}}</td>
+            <td class="col-sm-2">
+                <div class="row p-0">
+                    <div class="col-sm-6 pr-0">
+                        <button type="button" class="btn btn-sm btn-block btn-success" ng-click="select(chain)"><i
+                                class="fas fa-hand-pointer"></i> Kiválasztás
+                        </button>
+                    </div>
+                    <div class="col-sm-6 pl-0">
+                        <button type="button" class="btn btn-sm btn-block btn-danger" ng-click="delete(chain)"><i
+                                class="fas fa-trash-alt"></i> Törlés
+                        </button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="alert alert-info text-center" role="alert" ng-show="!chains.length">
+        Nincs egyetlen lánc sem az adatbázisban. Add hozzá a legelsőt!
+    </div>
+
+</section>
