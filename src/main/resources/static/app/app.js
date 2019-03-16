@@ -1,6 +1,5 @@
-var competitor;
 var app = angular.module(
-    "ProgContR",
+    "tesla",
     ["ngResource",
         "ngSanitize", "ngRoute", "ngAnimate", "ui.bootstrap", "ng-showdown"]).filter('to_trusted',
     ['$sce', function ($sce, $rootScope) {
