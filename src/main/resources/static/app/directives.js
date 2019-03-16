@@ -6,7 +6,7 @@ app.directive("navHash", function () {
             device: "="
         },
         replace: true,
-        templateUrl: "webapp/nav.html"
+        templateUrl: "app/nav.html"
     };
 });
 
@@ -21,6 +21,6 @@ app.directive("imageModal", [
                 });
             },
             replace: true,
-            templateUrl: "webapp/image-modal.html"
+            templateUrl: "app/image-modal.html"
         };
     }]);

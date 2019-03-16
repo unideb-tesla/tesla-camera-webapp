@@ -11,13 +11,13 @@ var app = angular.module(
 
 app.config(function ($routeProvider) {
     $routeProvider.otherwise({
-        templateUrl: "webapp/devices.html",
+        templateUrl: "app/devices.html",
         controller: "devicesCtrl"
     }).when("/devices/:id", {
-        templateUrl: "webapp/device.html",
+        templateUrl: "app/device.html",
         controller: "deviceCtrl"
     }).when("/chain", {
-        templateUrl: "webapp/chains.html",
+        templateUrl: "app/chains.html",
         controller: "chainCtrl"
     });
 });
