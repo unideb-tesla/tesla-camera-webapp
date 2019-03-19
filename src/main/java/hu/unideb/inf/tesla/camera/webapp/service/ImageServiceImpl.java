@@ -37,7 +37,7 @@ public class ImageServiceImpl implements ImageService {
                     .mac(request.getMac())
                     .name(request.getImage().getOriginalFilename())
                     .contentType(request.getImage().getContentType())
-                    .latitude(request.getTimestamp())
+                    .latitude(request.getLatitude())
                     .created(OffsetDateTime.now())
                     .build();
 
